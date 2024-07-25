@@ -15,38 +15,49 @@ struct Deck {
     cards: Vec<String>,
 }
 
-fn main() {
-    // let- declares a new binding
-    // let deck : Deck -> type annotattion- type inlays
-    // Deck { cards: vec![] } -> Struct literal, creates an instance of a struct
-    // vec![] -> creates an empty vector, ! indicates a macro
-    // you can also write it as { cards: Vec::new() } , it is the same
+//add an implementation for a new Instance of Deck
+impl Deck {
+    //new function with return type anotation -> Deck , or Self, which reinfers its own type
+    fn new() -> Self {
+        // let- declares a new binding
+        // let deck : Deck -> type annotattion- type inlays
+        // Deck { cards: vec![] } -> Struct literal, creates an instance of a struct
+        // vec![] -> creates an empty vector, ! indicates a macro
+        // you can also write it as { cards: Vec::new() } , it is the same
 
-    // list of suits - hearts, spades, clubs, diamonds
-    // list of values - ace, two, three
-    // double nested for loop
+        // list of suits - hearts, spades, clubs, diamonds
+        // list of values - ace, two, three
+        // double nested for loop
 
-    //indicate whether this array size changes overtime with a vec, if it doesnt , with a normal
-    //array
+        //indicate whether this array size changes overtime with a vec, if it doesnt , with a normal
+        //array
 
-    let suits = ["Hearts", "Spades", "Diamonds"];
-    let values = ["Ace", "Two", "Three"];
+        let suits = ["Hearts", "Spades", "Diamonds"];
+        let values = ["Ace", "Two", "Three"];
 
-    //mut -> make mutable, lets (bindings) are immutable by default, and cant be reassigned
-    // loop in the vec array
+        //mut -> make mutable, lets (bindings) are immutable by default, and cant be reassigned
+        // loop in the vec array
 
-    let mut cards = vec![];
+        let mut cards = vec![];
 
-    for suit in suits {
-        for value in values {
-            // format teplate literal values
-            let card = format!("{} of {}", value, suit);
-            cards.push(card);
+        for suit in suits {
+            for value in values {
+                // format teplate literal values
+                let card = format!("{} of {}", value, suit);
+                cards.push(card);
+            }
         }
-    }
 
-    // cards are mutable so remove the vec![]
-    let deck = Deck { cards };
-    //print the deck with a {:?} formatter, for a debugged printed line
+        // cards are mutable so remove the vec![]
+        let deck = Deck { cards };
+        return deck;
+    }
+}
+
+fn main() {
+    // add the implementation of new function of deck struct in the main fn
+    let deck = Deck::new();
+    //print the deck with a {:?} formatter, for a debugged printed line, add # for an escaped
+    //printed array
     println!("Heres is the deck: {:#?}", deck);
 }
