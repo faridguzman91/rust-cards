@@ -22,7 +22,31 @@ fn main() {
     // vec![] -> creates an empty vector, ! indicates a macro
     // you can also write it as { cards: Vec::new() } , it is the same
 
-    let deck = Deck { cards: vec![] };
+    // list of suits - hearts, spades, clubs, diamonds
+    // list of values - ace, two, three
+    // double nested for loop
+
+    //indicate whether this array size changes overtime with a vec, if it doesnt , with a normal
+    //array
+
+    let suits = ["Hearts", "Spades", "Diamonds"];
+    let values = ["Ace", "Two", "Three"];
+
+    //mut -> make mutable, lets (bindings) are immutable by default, and cant be reassigned
+    // loop in the vec array
+
+    let mut cards = vec![];
+
+    for suit in suits {
+        for value in values {
+            // format teplate literal values
+            let card = format!("{} of {}", value, suit);
+            cards.push(card);
+        }
+    }
+
+    // cards are mutable so remove the vec![]
+    let deck = Deck { cards };
     //print the deck with a {:?} formatter, for a debugged printed line
-    println!("Heres is the deck: {:?}", deck);
+    println!("Heres is the deck: {:#?}", deck);
 }
