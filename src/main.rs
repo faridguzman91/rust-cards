@@ -9,6 +9,8 @@
 // derive -> attribute, specifies which traits to automatically implement for this strict
 // (Debug) -> Trait (Debug), traits a set of functions
 
+use rand::{seq::SliceRandom, thread_rng};
+
 #[derive(Debug)]
 
 struct Deck {
@@ -47,16 +49,24 @@ impl Deck {
                 cards.push(card);
             }
         }
-
         // cards are mutable so remove the vec![]
-        let deck = Deck { cards };
-        return deck;
+        // you can also just return the Deck struct instead of declaring it again
+        //  or just remove the semicolon and remove return, because its an implicit return
+        Deck { cards }
+    }
+    //shuffle fn that is changing the Deck struct, makes the self mutable
+    fn shuffle(&mut self) {
+        //random number variable obviously changes, make it also mutable
+        let mut rng = thread_rng();
+        self.cards.shuffle(&mut rng)
     }
 }
 
 fn main() {
-    // add the implementation of new function of deck struct in the main fn
-    let deck = Deck::new();
+    // add the implementation of new function of deck struct in the main fn, make it also mutable
+    let mut deck = Deck::new();
+
+    deck.shuffle();
     //print the deck with a {:?} formatter, for a debugged printed line, add # for an escaped
     //printed array
     println!("Heres is the deck: {:#?}", deck);
