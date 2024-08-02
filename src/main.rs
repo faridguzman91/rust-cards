@@ -9,6 +9,7 @@
 // derive -> attribute, specifies which traits to automatically implement for this strict
 // (Debug) -> Trait (Debug), traits a set of functions
 
+//import code from crates, you can import multiple things on one line using curly braces
 use rand::{seq::SliceRandom, thread_rng};
 
 #[derive(Debug)]
@@ -39,7 +40,6 @@ impl Deck {
 
         //mut -> make mutable, lets (bindings) are immutable by default, and cant be reassigned
         // loop in the vec array
-
         let mut cards = vec![];
 
         for suit in suits {
@@ -60,6 +60,14 @@ impl Deck {
         let mut rng = thread_rng();
         self.cards.shuffle(&mut rng)
     }
+
+    // deal function with changing deck struct, makes self mutable
+    // num_cards and any positive size, and -> Vec of strings as return type
+    fn deal(&mut self, num_cards: usize) -> Vec<String> {
+        //split off the array from the nummber of cards we need off the total length, return only
+        //remaining cards
+        self.cards.split_off(self.cards.len() - num_cards)
+    }
 }
 
 fn main() {
@@ -67,7 +75,8 @@ fn main() {
     let mut deck = Deck::new();
 
     deck.shuffle();
+    let cards = deck.deal(3);
     //print the deck with a {:?} formatter, for a debugged printed line, add # for an escaped
     //printed array
-    println!("Heres is the deck: {:#?}", deck);
+    println!("Heres is your hand: {:#?}", cards);
 }
